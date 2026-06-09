@@ -1,15 +1,19 @@
-﻿namespace App_FGNC
-{
-    public partial class App : Application
-    {
-        public App()
-        {
-            InitializeComponent();
-        }
+using App_FGNC.Views;
+using Microsoft.Maui.Storage;
 
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new AppShell());
-        }
+namespace App_FGNC;
+
+public partial class App : Application
+{
+    public App()
+    {
+        InitializeComponent();
+
+        bool isLogged = Preferences.Default.Get("isLoggedIn", false);
+
+        if (isLogged)
+            MainPage = new AppShell();
+        else
+            MainPage = new LoginPage();
     }
 }
